@@ -5,11 +5,11 @@ public class Test {
 
     public static void main(String[] args) {
 
-        String filename = "testFile.txt";
-        int nTest = 100000;
+        String filename = "points.txt";
+        int nTest = 5000;
 
         //create file with nTest points and create list
-        DelaunayTester.createPointsFile(nTest, filename);
+        //DelaunayTester.createPointsFile(nTest, filename);
         List<DelaunayTriangulation.Point> points = readPointsFromFile(filename);
 
         //starting triangulation on file
@@ -29,6 +29,29 @@ public class Test {
             (n) -> (double) n * n,                 // N^2
             (n) -> n * (Math.log(n) / Math.log(2)) // N log N
         );
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Computing the mininum spanning tree...");
+
+        MST mst = new MST();
+
+        double alpha = 40;
+
+        MST.MSTResult resultMst = mst.computeMST(result, alpha);
+
+        System.out.println("Done");
+        if(resultMst.alphaProperty)
+        {
+            System.out.println("Alpha property respected" );
+            System.out.println("The total weight of the minimum spanning tree is: " + resultMst.totalWeight );
+        }
+        else
+        {
+            System.out.println("Alpha property not respected" );
+        }
 
         
     }
